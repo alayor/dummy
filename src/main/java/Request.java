@@ -4,11 +4,15 @@ public class Request {
     private int currentFloor;
     private int destinationFloor;
 
-    public Request(int currentFloor) {
+    public Request(int currentFloor, Direction direction) {
       this.currentFloor = currentFloor;
+      switch (direction) {
+          case UP: goUp(); break;
+          case DOWN: goDown();
+      }
     }
 
-    public void goUp() {
+    private void goUp() {
         if(currentFloor == 5) {
             throw new RuntimeException("Cannot go up on fifth floor!");
         }
@@ -20,7 +24,7 @@ public class Request {
         return goingUp;
     }
 
-    public void goDown() {
+    private void goDown() {
         if(currentFloor == 0) {
             throw new RuntimeException("Cannot go down on ground floor!");
         }

@@ -16,10 +16,8 @@ public class RequestTest {
 
     @Test
     public void shouldRequestToGoUp() throws Exception {
-        // given
-        request = new Request(0);
         // when
-        request.goUp();
+        request = new Request(0, Direction.UP);
         // then
         assertTrue(request.goingUp());
         assertFalse(request.goingDown());
@@ -27,21 +25,17 @@ public class RequestTest {
 
     @Test
     public void shouldRequestToGoDown() throws Exception {
-        // given
-        request = new Request(1);
         // when
-        request.goDown();
+        request = new Request(1, Direction.DOWN);
         // then
         assertTrue(request.goingDown());
     }
 
     @Test
     public void shouldThrowAnExceptionIfRequestToGoDownBeingInFirstFloor() throws Exception {
-        // given
-        request = new Request(0);
         try {
             // when
-            request.goDown();
+            request = new Request(0, Direction.DOWN);
         } catch (Exception ex) {
             // then
             assertEquals("Cannot go down on ground floor!", ex.getMessage());
@@ -52,11 +46,9 @@ public class RequestTest {
 
     @Test
     public void shouldThrowAnExceptionIfRequestToGoUpBeingInFifthFloor() throws Exception {
-        // given
-        request = new Request(5);
         try {
-            // when
-            request.goUp();
+            // given
+            request = new Request(5, Direction.UP);
         } catch (Exception ex) {
             // then
             assertEquals("Cannot go up on fifth floor!", ex.getMessage());
@@ -68,7 +60,7 @@ public class RequestTest {
     @Test
     public void shouldGetDestinationFloor() throws Exception {
         // given
-        request = new Request(2);
+        request = new Request(2, Direction.UP);
         request.goToFloor(5);
         // when
         int destinationFloor = request.getDestinationFloor();
